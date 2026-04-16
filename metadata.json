@@ -1,0 +1,13 @@
+{
+  "name": "AquaScan AI",
+  "description": "AI-powered water quality detection using image classification and crowdsourced reporting.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "AI Image Analysis",
+    "Real-time Mapping",
+    "Crowdsourced Reporting"
+  ]
+}

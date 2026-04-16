@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "App user profile including role (Admin/Analyst)",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID from Firebase Auth" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User's full name" },
+        "role": { "type": "string", "enum": ["admin", "analyst"], "description": "User role" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the user was created" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "WaterReport": {
+      "title": "Water Report",
+      "description": "A report filed by an analyst regarding water quality at a specific location",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "analystId": { "type": "string", "description": "UID of the analyst who submitted the report" },
+        "analystName": { "type": "string" },
+        "imageUrl": { "type": "string", "description": "URL of the water sample image" },
+        "location": { "type": "object", "description": "GPS coordinates {lat, lng}" },
+        "contaminationLevel": { "type": "string", "enum": ["safe", "moderate", "unsafe"] },
+        "aiResult": { "type": "object", "description": "Details from Gemini AI analysis" },
+        "purificationAdvice": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "verified", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["analystId", "imageUrl", "location", "contaminationLevel", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/reports/{reportId}": {
+      "schema": "WaterReport",
+      "description": "Water quality reports submitted by analysts"
+    }
+  }
+}
